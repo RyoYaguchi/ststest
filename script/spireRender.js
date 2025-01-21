@@ -728,13 +728,16 @@ function renderVictoryScreen(scene, fontBold, fontRegular) {
                     player.deck.push(reward); // スキルカードを追加
                 }
                 selectedCount++;
+        
+                renderPlayerStats(scene);
+        
                 if (!cardEntity.destroyed()) {
                     cardEntity.destroy();
                 }
-
+        
                 if (selectedCount === 2) {
                     victoryComponents.forEach((component) => !component.destroyed() && component.destroy());
-                    renderNextDestinationSelection(scene, fontBold, fontRegular);
+                    renderNextDestinationSelection(scene, spireData.fonts.bold, spireData.fonts.regular);
                 }
             }
         });
@@ -939,13 +942,14 @@ function renderNextDestinationSelection(scene, fontBold, fontRegular) {
 
             if (option.eventName === "敵と遭遇する") {
                 console.log("Starting battle...");
-                spireEvents.emit("startBattle", scene); // 戦闘開始イベントを発火
+                spireEvents.emit("startBattle", scene); // 戦闘開始イベント
             }
 
             spireData.player.gold -= option.cost;
             console.log(`Gold spent: ${option.cost}. Remaining gold: ${spireData.player.gold}`);
 
             spireData.player.walkCount = (spireData.player.walkCount || 0) + 1;
+            renderPlayerStats(scene);//ここでステ更新
             console.log(`Player walkCount: ${spireData.player.walkCount}`);
 
             cardEntities.forEach((card) => {

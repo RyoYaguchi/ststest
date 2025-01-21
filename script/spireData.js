@@ -20,10 +20,10 @@ const initialPlayerData = {
     maxHealth: 30,
     health: 30,
     maxMana: 4,
-    mana: 100,
+    mana: 4,
     guard: 0,
     armour: 0,
-    strength: 1000,
+    strength: 0,
     hand: [], // 手札
     deck: [], // デッキ
     discardPile: [], // 捨て札
@@ -358,14 +358,14 @@ const nextWay = [
         id: 1,
         eventName: "敵と遭遇する",
         effect: "戦闘を開始します。",
-        cost: 0, // 敵と遭遇する場合はコストなし
+        cost: 0, 
         apply: (player, enemy, setEnemy) => {
             const randomEnemy = getRandomEnemy();
             if (setEnemy) {
                 setEnemy(randomEnemy);
             }
             console.log(`New enemy encountered: ${randomEnemy.name || "Unknown Enemy"}`);
-            console.log("Enemy details:", randomEnemy); // 追加情報を出力
+            console.log("Enemy details:", randomEnemy); 
         },
     },
     {

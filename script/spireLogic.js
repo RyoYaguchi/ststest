@@ -80,6 +80,8 @@ spireEvents.on("reshuffleDeck", reshuffleDeck);
 
 
 function startBattle(scene) {
+    spireData.player.guard = 0;
+    spireData.player.mana = spireData.player.maxMana;
     spireRender.renderPlayerStats(scene);
     spireRender.renderEnemyStats(scene);
     decideEnemyAction(spireData.enemy);
@@ -134,7 +136,6 @@ function endTurn(scene, fontBold, fontRegular) {
         player.paralised--; // 麻痺の値を1減少
     }
 
-    // ガードをリセット
     player.guard = 0;
 
     // 敵の次のアクションを決定
